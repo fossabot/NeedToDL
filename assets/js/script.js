@@ -1,7 +1,6 @@
 var fs = require('fs');
 var ytdl = require('ytdl-core');
 var mkdirp = require('mkdirp');
-const homedir = require('os').homedir().replace(/\\/g, "/");
 
 
 function submit() {
@@ -35,17 +34,19 @@ function dlsptf(link) {
     return ("not working yet")
 }
 
-function downloadYT(info, url, format) {
+async function downloadYT(info, url, format) {
     var author = info.author.name.split(' ').join('_')
     var title = info.title.split(' ').join('_')
     if (format == "0") {
 
-        ytdl(url, { filter: (format) => format.container === "mp4" })
+        await ytdl(url, { filter: (format) => format.container === "mp4" })
             .pipe(fs.createWriteStream(`./dl/${author}-${title}.mp4`));
+        printit("Download Done")
     } else if (format == "1") {
         //a
-        ytdl(url, { filter: "audioonly" })
+        await ytdl(url, { filter: "audioonly" })
             .pipe(fs.createWriteStream(`./dl/${author}-${title}.webm`));
+        printit("Download Done")
 
     }
 }
