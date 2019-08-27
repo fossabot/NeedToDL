@@ -10,17 +10,31 @@ function submit() {
     if (!fs.existsSync("./videos")) {
         mkdirp('./videos', function(err) {});
     }
-    ytdl(testurl, { filter: (format) => format.container === 'mp4' })
-        .pipe(fs.createWriteStream('./videos/video.mp4'));
+    /*ytdl(testurl, { filter: (format) => format.container === 'mp4' })
+        .pipe(fs.createWriteStream('./videos/video.mp4'));*/
 
 
-    //ytinfo(testurl);
+    var info = ytinfo(link);
+
 
 }
 
-function ytinfo(id) {
-    var validate = ytdl.validateURL(testurl)
+function ytinfo(url) {
+    var validate = ytdl.validateURL(url)
     if (validate != true) return alert("Not valid URL")
+    ytdl.getInfo(url, (err, info) => {
+        if (err) return alert(err);
+        console.log(info.author.name + info.title)
+        download(info, url)
+    })
+
+}
+
+function download(info, url) {
+    var author = info.author.name.split(' ').join('_')
+    var title = info.title.split(' ').join('_')
+    ytdl(url, { filter: (format) => format.container === 'mp4' })
+        .pipe(fs.createWriteStream(`./videos/${author}-${title}.mp4`));
 }
 
 function printit(s) {
