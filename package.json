@@ -4,7 +4,7 @@
     "description": "An app for downloading music from different websites using different NPM packages",
     "main": "main.js",
     "scripts": {
-        "test": "electron ."
+        "start": "electron ."
     },
     "author": "",
     "license": "AGPL-3.0-or-later",
