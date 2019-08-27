@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>NeedToDL v0.1</title>
+    <title>NeedToDL v0.2</title>
 </head>
 
 <body>
@@ -12,6 +12,16 @@
         <input id="ytlink" type="text" name="link" /><br />
     </form>
     <input type="button" value="Submit" id="submit" name="submit" onclick="submit()">
+    <select id="mpsel">
+        <option value="mp4">MP4</option>
+        <option value="mp3">MP3/WEBM</option>
+        
+      </select>
+    <select id="dlsel">
+        <option value="yt">YouTube</option>
+        <option value="sptf">Spotify</option>
+        
+      </select>
     <div id="log"></div>
 
     <script src="./assets/js/script.js"></script>
