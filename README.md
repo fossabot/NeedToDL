@@ -3,3 +3,5 @@
 
  An Electron app for downloading music from various sites (currently only YouTube)
  If you would like to suggest something, please submit it in Issues.
+
+### Note: We are not responsible for copyright infringement, this is only a demonstration.
