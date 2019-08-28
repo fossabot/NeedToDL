@@ -16,8 +16,10 @@
         "fluent-ffmpeg": "^2.1.2",
         "fs": "^0.0.1-security",
         "horizon-youtube-mp3": "^1.9.2",
+        "http": "^0.0.0",
         "mkdirp": "^0.5.1",
         "os": "^0.1.1",
+        "soundcloud-dl": "^1.0.3",
         "ytdl-core": "^0.29.5"
     }
 }

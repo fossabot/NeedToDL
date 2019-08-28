@@ -1,7 +1,16 @@
 var fs = require('fs');
 var ytdl = require('ytdl-core');
 var mkdirp = require('mkdirp');
+var soundcloudDl = require("soundcloud-dl");
+var http = require('http');
 
+while (true) {
+    if (document.getElementById('ytlink').selectedIndex == "1") {
+        var divOne = document.getElementById('mp');
+        divOne.style.display = 'none';
+        break;
+    }
+}
 
 function submit() {
     var link = document.getElementById('ytlink').value
@@ -14,7 +23,7 @@ function submit() {
     if (dl == "0") {
         ytinfo(link, format);
     } else if (dl == "1") {
-        dlsptf(link)
+        dlsndcld(link)
     }
 
 }
@@ -30,8 +39,15 @@ function ytinfo(url, format) {
 
 }
 
-function dlsptf(link) {
-    return ("not working yet")
+function dlsndcld(url) {
+
+    soundcloudDl.getSongDlByURL(url).then(function(song) {
+        console.log(song)
+        var dl = song.http_mp3_128_url.replace("https", "http")
+        const request = http.get(dl, function(response) {
+            response.pipe(fs.createWriteStream("./dl/soundcloud.mp3"));
+        });
+    });
 }
 
 async function downloadYT(info, url, format) {
@@ -43,7 +59,7 @@ async function downloadYT(info, url, format) {
             .pipe(fs.createWriteStream(`./dl/${author}-${title}.mp4`));
         printit("Download Done")
     } else if (format == "1") {
-        //a
+        //If anyone knows how to convert it to mp3 please open an issue in the GitHub repo (Already tried something with ffmpeg and other npm libraries)
         await ytdl(url, { filter: "audioonly" })
             .pipe(fs.createWriteStream(`./dl/${author}-${title}.webm`));
         printit("Download Done")
