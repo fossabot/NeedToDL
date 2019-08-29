@@ -66,7 +66,7 @@ function dltw(link) {
             console.log(info.full_text);
             console.log(info.variants);
 
-            var dl = info.variants[2].url.replace("https", "http") //QUALITY NOT AVALIBLE AT ALL TWVIDS, IF NEEDED, OPEN ISSUE
+            var dl = info.variants[2].url.replace("https", "http") //TWVIDEOS QUALITY CHOOSER? IF NEEDED, OPEN ISSUE
             const request = http.get(dl, function(response) {
                 response.pipe(fs.createWriteStream("./dl/twitter.mp4"));
             });
