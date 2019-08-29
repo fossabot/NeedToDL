@@ -3,6 +3,7 @@ var ytdl = require('ytdl-core');
 var mkdirp = require('mkdirp');
 var soundcloudDl = require("soundcloud-dl");
 var http = require('http');
+var videoUrlLink = require('video-url-link');
 
 function hidehandler(select) {
     console.log(select)
@@ -10,7 +11,7 @@ function hidehandler(select) {
         var sel = document.getElementById('mpsel');
         sel.style.visibility = 'visible';
 
-    } else if (select.value == 'sndcld') {
+    } else if (select.value == 'sndcld' || select.value == 'tw') {
         var sel = document.getElementById('mpsel');
         sel.style.visibility = 'hidden';
     }
@@ -28,6 +29,8 @@ function submit() {
         ytinfo(link, format);
     } else if (dl == "1") {
         dlsndcld(link)
+    } else if (dl == "2") {
+        dltw(link)
     }
 
 }
@@ -52,6 +55,25 @@ function dlsndcld(url) {
             response.pipe(fs.createWriteStream("./dl/soundcloud.mp3"));
         });
     });
+    printit("Download Done")
+}
+
+function dltw(link) {
+    videoUrlLink.twitter.getInfo(link, {}, (error, info) => {
+        if (error) {
+            console.error(error);
+        } else {
+            console.log(info.full_text);
+            console.log(info.variants);
+
+            var dl = info.variants[2].url.replace("https", "http") //QUALITY NOT AVALIBLE AT ALL TWVIDS, IF NEEDED, OPEN ISSUE
+            const request = http.get(dl, function(response) {
+                response.pipe(fs.createWriteStream("./dl/twitter.mp4"));
+            });
+            printit("Download Done")
+        }
+    });
+
 }
 
 async function downloadYT(info, url, format) {

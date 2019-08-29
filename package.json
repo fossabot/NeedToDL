@@ -20,12 +20,19 @@
         "os": "^0.1.1",
         "path": "^0.12.7",
         "soundcloud-dl": "^1.0.3",
+        "video-url-link": "^0.1.4",
         "ytdl-core": "^0.29.5"
     },
     "build": {
-        "appId": "com.hernikplays.needtodl",
+        "productName": "PVM Player",
+        "appId": "scripter.PVMplayer",
         "win": {
-            "target": "nsis"
+            "target": [
+                "portable"
+            ]
+        },
+        "portable": {
+            "artifactName": "needtodl.exe"
         }
     },
     "devDependencies": {
