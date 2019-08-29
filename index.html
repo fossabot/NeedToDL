@@ -11,19 +11,18 @@
     <form method="post" action="/handler">
         <input id="ytlink" type="text" name="link" /><br />
     </form>
+    <select id="dlsel" onchange="hidehandler(this)">
+      <option value="yt">YouTube</option>
+      <option value="sndcld">SoundCloud</option>
+      
+    </select>
+    <select id="mpsel">
+      <option value="mp4">MP4</option>
+      <option value="mp3">MP3/WEBM</option>
+      
+    </select>
     <input type="button" value="Submit" id="submit" name="submit" onclick="submit()">
-    <div id="mp">
-        <select id="mpsel">
-        <option value="mp4">MP4</option>
-        <option value="mp3">MP3/WEBM</option>
-        
-      </select>
-    </div>
-    <select id="dlsel">
-        <option value="yt">YouTube</option>
-        <option value="sndcld">SoundCloud</option>
-        
-      </select>
+
     <div id="log"></div>
 
     <script src="./assets/js/script.js"></script>

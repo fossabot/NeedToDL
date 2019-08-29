@@ -4,11 +4,15 @@ var mkdirp = require('mkdirp');
 var soundcloudDl = require("soundcloud-dl");
 var http = require('http');
 
-while (true) {
-    if (document.getElementById('ytlink').selectedIndex == "1") {
-        var divOne = document.getElementById('mp');
-        divOne.style.display = 'none';
-        break;
+function hidehandler(select) {
+    console.log(select)
+    if (select.value == 'yt') {
+        var sel = document.getElementById('mpsel');
+        sel.style.visibility = 'visible';
+
+    } else if (select.value == 'sndcld') {
+        var sel = document.getElementById('mpsel');
+        sel.style.visibility = 'hidden';
     }
 }
 
